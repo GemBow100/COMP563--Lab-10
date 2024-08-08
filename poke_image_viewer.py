@@ -42,12 +42,15 @@ frm.grid(sticky= NSEW)
 image_path = os.path.join(script_dir,'poke_ball.png')
 photo = PhotoImage(file=image_path)
 
-lbl_image = ttk.Label(#fill in 1 and 2)
-lbl_image.grid(#fill in a,b,c,d)
+lbl_image = ttk.Label(frm, text= "Select a Pokemon")
+lbl_image.grid(row=0, column=1, padx=(10,20), pady=(10,20), sticky=NS)
 
 #Create button to set desktop background
 def handle_set_desktop():
-  ##finish this
+    image_path = photo 
+    if image_path == '' : return
+    file_ext =
+    ##finish this
 
 def handle_poke_sel(event):
   ##Finish this
