@@ -49,9 +49,9 @@ poke_list = poke_api.get_pokemon_names
 cbox_poke = ttk.Combobox(frm, values=poke_list, state='readonly')
 cbox_poke.set("Select a Pokemon")
 cbox_poke.grid(row=1, padx=10, pady=10)
-
-button_set = ttk.Button(text="Set Desktop Image", state="disabled")
-button_set.grid(row=2, padx=10, pady=10)
+def handle_set_desktop(): 
+  button_set = ttk.Button(text="Set Desktop Image", state="disabled")
+  button_set.grid(row=2, padx=10, pady=10)
 
 def handle_os_sel(event):
   selected_pokemon = cbox_poke.get()
