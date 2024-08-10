@@ -39,22 +39,27 @@ frm.rowconfigure(0, weight=1)
 frm.grid(sticky= NSEW)
 
 # TODO: Populate frames with widgets and define event handler functions
-image_path = os.path.join(script_dir,'poke_ball.png')
+image_path = os.path.join(images_dir,'dugtrio.png')
 photo = PhotoImage(file=image_path)
 
-lbl_image = ttk.Label(frm, text= "Select a Pokemon")
-lbl_image.grid(row=0, column=1, padx=(10,20), pady=(10,20), sticky=NS)
+lbl_image = ttk.Label(frm, image=photo)
+lbl_image.grid(row=0, padx=(10,20), pady=(10,20), sticky=NS)
 
-#Create button to set desktop background
-def handle_set_desktop():
-    image_path = photo 
-    if image_path == '' : return
-    file_ext =
-    ##finish this
+poke_list = poke_api.get_pokemon_names
+cbox_poke = ttk.Combobox(frm, values=poke_list, state='readonly')
+cbox_poke.set("Select a Pokemon")
+cbox_poke.grid(row=1, padx=10, pady=10)
 
-def handle_poke_sel(event):
-  ##Finish this
+button_set = ttk.Button(text="Set Desktop Image", state="disabled")
+button_set.grid(row=2, padx=10, pady=10)
 
-cbox_poke_sel.bind('<<ComboboxSelected>>', handle_poke_sel)
+def handle_os_sel(event):
+  selected_pokemon = cbox_poke.get()
+  photo['file'] = os.path.join(images_dir, f'{selected_pokemon}.png')
+  lbl_image['image'] = photo
+  button_set['state'] = "enabled"
+
+cbox_poke.bind('<<ComboboxSelected>>', handle_os_sel)
+
 
 root.mainloop()
