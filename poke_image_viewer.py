@@ -60,10 +60,9 @@ def handle_os_sel(event):
 
 cbox_poke.bind('<<ComboboxSelected>>', handle_os_sel)
 
-def handle_set_desktop():# needs to be fix.
 
-  button_set = ttk.Button(text="Set Desktop Image", state="disabled")
-  button_set.grid(row=2, padx=10, pady=10)
+button_set = ttk.Button(text="Set Desktop Image", state="disabled")
+button_set.grid(row=2, padx=10, pady=10)
 
 
 root.mainloop()
