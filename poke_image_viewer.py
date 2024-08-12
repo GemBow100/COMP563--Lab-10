@@ -49,17 +49,37 @@ poke_list = poke_api.get_pokemon_names
 cbox_poke = ttk.Combobox(frm, values=poke_list, state='readonly')
 cbox_poke.set("Select a Pokemon")
 cbox_poke.grid(row=1, padx=10, pady=10)
-def handle_set_desktop():# needs to be fix.
-  button_set = ttk.Button(text="Set Desktop Image", state="disabled")
-  button_set.grid(row=2, padx=10, pady=10)
 
-def handle_os_sel(event):
+def handle_poke_sel(event):
+    global photo
+    pokemon_name = cbox_poke.get()
+    image_path = poke_api.download_pokemon_artwork(pokemon_name, images_dir)
+    if image_path:
+        photo = PhotoImage(file=image_path)
+        lbl_image.config(image=photo, text="")
+    else:
+        lbl_image.config(text="Failed to load image.", image="")
+
+cbox_poke.bind('<<ComboboxSelected>>', handle_poke_sel)
+
+'''def handle_set_desktop():# needs to be fix.
+  button_set = ttk.Button(text="Set Desktop Image", state="disabled")
+  button_set.grid(row=2, padx=10, pady=10)'''
+def handle_set_desktop():
+    global photo
+    if photo:
+        image_path = os.path.join(images_dir, f"{cbox_poke.get()}.png")
+        image_lib.set_desktop_background(image_path)
+
+btn_set_desktop = ttk.Button(frm, text="Set as Desktop Background", command=handle_set_desktop)
+btn_set_desktop.grid(row=2, column=1, padx=(10, 20), pady=(10, 20), sticky=NS)
+'''def handle_os_sel(event):
   selected_pokemon = cbox_poke.get()
   photo['file'] = os.path.join(images_dir, f'{selected_pokemon}.png')
   lbl_image['image'] = photo
   button_set['state'] = "enabled"
 
-cbox_poke.bind('<<ComboboxSelected>>', handle_os_sel)
+cbox_poke.bind('<<ComboboxSelected>>', handle_os_sel)'''
 
 
 root.mainloop()
