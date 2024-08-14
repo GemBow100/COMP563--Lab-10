@@ -1,4 +1,5 @@
 """
+Team: Joelle Waugh, Manuel Manrike Lopez, Ricardo Rubin
 Description:
   Graphical user interface that displays the official artwork for a
   user-specified Pokemon, which can be set as the desktop background image.
@@ -50,18 +51,20 @@ cbox_poke = ttk.Combobox(frm, values=poke_list, state='readonly')
 cbox_poke.set("Select a Pokemon")
 cbox_poke.grid(row=1, padx=10, pady=10)
  
-
+def handle_set_desktop():
+  if cbox_poke.get():
+    button_set.state("disable")
 
 def handle_os_sel(event):
-  selected_pokemon = cbox_poke.get()
-  photo['file'] = os.path.join(images_dir, f'{selected_pokemon}.png')
+  image_lib = cbox_poke.get()
+  photo['file'] = os.path.join(images_dir, f'{image_lib}.png')
   lbl_image['image'] = photo
   button_set['state'] = "enabled"
 
 cbox_poke.bind('<<ComboboxSelected>>', handle_os_sel)
 
 
-button_set = ttk.Button(text="Set Desktop Image", state="disabled")
+button_set = ttk.Button(text="Set Desktop Image", state="disabled", command= handle_set_desktop)
 button_set.grid(row=2, padx=10, pady=10)
 
 
