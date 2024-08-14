@@ -56,8 +56,8 @@ def handle_set_desktop():
     button_set.state("disable")
 
 def handle_os_sel(event):
-  image_lib = cbox_poke.get()
-  photo['file'] = os.path.join(images_dir, f'{image_lib}.png')
+  get_pokemon_info = cbox_poke.get()
+  photo['file'] = os.path.join(images_dir, f'{get_pokemon_info}.png')
   lbl_image['image'] = photo
   button_set['state'] = "enabled"
 
